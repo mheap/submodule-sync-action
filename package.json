@@ -2,9 +2,10 @@
   "name": "submodule-sync-action",
   "version": "1.0.0",
   "description": "Sync a submodule on a schedule or on demand",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "npx @vercel/ncc build && npx convert-action"
   },
   "keywords": [],
   "author": "Michael Heap <m@michaelheap.com>",
