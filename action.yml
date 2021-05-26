@@ -1,0 +1,25 @@
+name: Submodule Sync
+description: Automatically update a submodule to the latest commit
+inputs:
+  token:
+    description: The GitHub API token to use
+    default: ${{ github.token }}
+    required: false
+  path:
+    description: The path in the repo to update
+    required: true
+  ref:
+    description: The branch name to check for updates in the remote repo
+    required: true
+  pr_branch:
+    description: The name of the branch to use when creating a pull request
+    required: true
+  target_branch:
+    description: The name of the branch that the PR should be raised against
+    required: true
+branding:
+  icon: activity
+  color: orange
+runs:
+  using: docker
+  image: "Dockerfile"
