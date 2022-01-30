@@ -37,6 +37,7 @@ async function action() {
   // Fetch the latest sha for the provided branch from that repo
   const [submoduleOwner, submoduleRepo] = submoduleUrl
     .replace("https://github.com/", "")
+    .replace(/\.git$/,"")
     .split("/", 2);
 
   const { data: ref } = await octokit.rest.git.getRef({
