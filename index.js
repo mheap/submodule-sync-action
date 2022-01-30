@@ -119,7 +119,12 @@ async function action() {
 }
 
 if (require.main === module) {
-  action();
+  try {
+    action();
+  } catch (e) {
+    console.log(e);
+    core.setFailed();
+  }
 }
 
 module.exports = action;
