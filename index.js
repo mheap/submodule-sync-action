@@ -15,7 +15,7 @@ async function action() {
   const owner = github.context.repo.owner;
   const repo = github.context.repo.repo;
 
-  const { data: mod } = await octokit.repos.getContent({
+  const { data: mod } = await octokit.rest.repos.getContent({
     owner,
     repo,
     path,
@@ -39,7 +39,7 @@ async function action() {
     .replace("https://github.com/", "")
     .split("/", 2);
 
-  const { data: ref } = await octokit.git.getRef({
+  const { data: ref } = await octokit.rest.git.getRef({
     owner: submoduleOwner,
     repo: submoduleRepo,
     ref: `heads/${targetRef}`,
@@ -53,7 +53,7 @@ async function action() {
 
   // Is it the same as the ref on the PR branch?
   try {
-    const { data: branchMod } = await octokit.repos.getContent({
+    const { data: branchMod } = await octokit.rest.repos.getContent({
       owner,
       repo,
       path,
@@ -78,7 +78,7 @@ async function action() {
     type: "commit",
   };
 
-  const branchName = await octokit.repos.createOrUpdateFiles({
+  const branchName = await octokit.rest.repos.createOrUpdateFiles({
     owner,
     repo,
     branch: prBranch,
@@ -93,7 +93,7 @@ async function action() {
 
   // Create a PR with this commit hash if it doesn't exist
   let pr = (
-    await octokit.pulls.list({
+    await octokit.rest.pulls.list({
       owner,
       repo,
       head: `${owner}:${prBranch}`,
@@ -103,7 +103,7 @@ async function action() {
   if (!pr) {
     console.log("Creating PR");
     pr = (
-      await octokit.pulls.create({
+      await octokit.rest.pulls.create({
         owner,
         repo,
         title: `Automated submodule update (${path})`,
