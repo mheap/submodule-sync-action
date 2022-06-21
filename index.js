@@ -27,16 +27,26 @@ async function action() {
   }
 
   // If the submodule does not start with github.com, bail out
+
   const submoduleUrl = mod.submodule_git_url;
-  if (!submoduleUrl.startsWith("https://github.com")) {
+  const allowedPrefixes = [
+    "https://github.com/",
+    "git@github.com:"
+  ]
+
+  const matchingPrefixes = allowedPrefixes.filter(p => submoduleUrl.startsWith(p));
+
+  if (matchingPrefixes.length == 0) {
     throw new Error(
       `Non-GitHub submodule found. Unable to process '${submoduleUrl}'`
     );
   }
 
+  const prefix = matchingPrefixes[0];
+
   // Fetch the latest sha for the provided branch from that repo
   const [submoduleOwner, submoduleRepo] = submoduleUrl
-    .replace("https://github.com/", "")
+    .replace(prefix, "")
     .replace(/\.git$/,"")
     .split("/", 2);
 
