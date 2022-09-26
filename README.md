@@ -32,7 +32,8 @@ jobs:
 | Name            | Description                                                 | Required | Default               |
 | --------------- | ----------------------------------------------------------- | -------- | --------------------- |
 | `token`         | The GitHub API token to use                                 | false    | `${{ github.token }}` |
-| `path`          | The path in the repo to update                              | true     |
-| `ref`           | The branch name to check for updates in the remote repo     | true     |
-| `pr_branch`     | The name of the branch to use when creating a pull request  | true     |
-| `target_branch` | The name of the branch that the PR should be raised against | true     |
+| `path`          | The path in the repo to update                              | true     |                       |
+| `ref`           | The branch name to check for updates in the remote repo     | true     |                       |
+| `pr_branch`     | The name of the branch to use when creating a pull request  | true     |                       |
+| `target_branch` | The name of the branch that the PR should be raised against | true     |                       |
+| `pr_body`       | Text to include in the generated PR's description           | false    | `""`                  |
