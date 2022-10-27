@@ -36,4 +36,5 @@ jobs:
 | `ref`           | The branch name to check for updates in the remote repo     | true     |                       |
 | `pr_branch`     | The name of the branch to use when creating a pull request  | true     |                       |
 | `target_branch` | The name of the branch that the PR should be raised against | true     |                       |
+| `base_branch`   | The name of the branch that the PR should be based on       | true     |
 | `pr_body`       | Text to include in the generated PR's description           | false    | `""`                  |

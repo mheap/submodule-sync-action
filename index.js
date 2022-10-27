@@ -7,6 +7,7 @@ async function action() {
   const token = core.getInput("token", { required: true });
   const path = core.getInput("path", { required: true });
   const targetRef = core.getInput("ref", { required: true });
+  const baseBranch = core.getInput("base_branch", { required: false });
   const targetBranch = core.getInput("target_branch", { required: true });
   const prBranch = core.getInput("pr_branch", { required: true });
   const prBody = core.getInput("pr_body", { required: false }) || '';
@@ -90,7 +91,7 @@ async function action() {
     type: "commit",
   };
 
-  const branchName = await octokit.rest.repos.createOrUpdateFiles({
+  const opts = {
     owner,
     repo,
     branch: prBranch,
@@ -101,7 +102,14 @@ async function action() {
         files,
       },
     ],
-  });
+  };
+
+  // Add base branch in a backwards compatible way
+  if (baseBranch){
+    opts.base = baseBranch;
+  }
+
+  const branchName = await octokit.rest.repos.createOrUpdateFiles(opts);
 
   // Create a PR with this commit hash if it doesn't exist
   let pr = (

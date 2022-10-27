@@ -17,6 +17,9 @@ inputs:
   target_branch:
     description: The name of the branch that the PR should be raised against
     required: true
+  base_branch:
+    description: The name of the branch that the PR should be based on
+    required: false
   pr_body:
     description: Text to include in the generated PR's description
     required: false
