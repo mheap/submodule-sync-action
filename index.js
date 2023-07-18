@@ -11,6 +11,7 @@ async function action() {
   const targetBranch = core.getInput("target_branch", { required: true });
   const prBranch = core.getInput("pr_branch", { required: true });
   const prBody = core.getInput("pr_body", { required: false }) || '';
+  const prLabels = core.getInput("pr_labels", { required: false }) || [];
 
   const octokit = new Octokit({ auth: token });
 
@@ -135,6 +136,20 @@ async function action() {
     console.log("PR created");
   } else {
     console.log("PR already exists. Not creating another");
+  }
+
+  // Add labels to PR
+  if (pr) {
+    await octokit.rest.issues.setLabels({
+      owner,
+      repo,
+      issue_number: pr.number,
+      labels: prLabels.split("\n").map(label => {
+        return {
+          name: label.trim()
+        };
+      })
+    });
   }
 }
 
