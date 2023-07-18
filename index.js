@@ -144,7 +144,7 @@ async function action() {
       owner,
       repo,
       issue_number: pr.number,
-      labels: prLabels.split("\n").map(label => {
+      labels: prLabels.split("\n").filter(label => label).map(label => {
         return {
           name: label.trim()
         };
