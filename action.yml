@@ -24,6 +24,10 @@ inputs:
     description: Text to include in the generated PR's description
     required: false
     default: ""
+  pr_labels:
+    description: The labels that the PR will have, newline-seperated
+    required: false
+    default: ""
 branding:
   icon: activity
   color: orange
