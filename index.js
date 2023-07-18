@@ -139,7 +139,7 @@ async function action() {
   }
 
   // Add labels to PR
-  if (pr) {
+  if (pr && prLabels) {
     await octokit.rest.issues.setLabels({
       owner,
       repo,
