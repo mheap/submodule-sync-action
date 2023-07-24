@@ -11,7 +11,7 @@ async function action() {
   const targetBranch = core.getInput("target_branch", { required: true });
   const prBranch = core.getInput("pr_branch", { required: true });
   const prBody = core.getInput("pr_body", { required: false }) || '';
-  const prLabels = core.getInput("pr_labels", { required: false }) || [];
+  const prLabels = core.getInput("pr_labels", { required: false }) || '';
 
   const octokit = new Octokit({ auth: token });
 
