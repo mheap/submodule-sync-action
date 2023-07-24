@@ -23,14 +23,14 @@ inputs:
   pr_body:
     description: Text to include in the generated PR's description
     required: false
-    default: ""
+    default: ''
   pr_labels:
     description: The labels that the PR will have, newline-seperated
     required: false
-    default: ""
+    default: ''
 branding:
   icon: activity
   color: orange
 runs:
-  using: docker
-  image: "Dockerfile"
+  using: node16
+  main: dist/index.js
