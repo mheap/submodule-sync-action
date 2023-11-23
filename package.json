@@ -17,7 +17,7 @@
     "octokit-commit-multiple-files": "^4"
   },
   "devDependencies": {
-    "jest": "^27.0.1",
+    "jest": "^29.7.0",
     "nock": "^11.9.1"
   }
 }
